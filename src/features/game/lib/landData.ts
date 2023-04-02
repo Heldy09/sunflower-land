@@ -6,6 +6,8 @@ import {
   Inventory,
   ExpansionConstruction,
 } from "../types/game";
+import { marketRate } from "./halvening";
+import { SEEDS } from "../types/seeds";
 
 const INITIAL_STOCK: Inventory = {
   "Sunflower Seed": new Decimal(400),
@@ -240,7 +242,7 @@ const INITIAL_EXPANSIONS: ExpansionConstruction[] = [
 
 const INITIAL_BUMPKIN: Bumpkin = {
   id: 1,
-  experience: 2000,
+  experience: 0,
   tokenUri: "bla",
   equipped: {
     body: "Beige Farmer Potion",
@@ -263,7 +265,7 @@ const INITIAL_BUMPKIN: Bumpkin = {
 };
 
 export const OFFLINE_FARM: GameState = {
-  balance: new Decimal(10),
+  balance: SEEDS()["Sunflower Seed"].sfl.mul(5),
   inventory: {
     "White Tulips": new Decimal(10),
     Artist: new Decimal(1),
@@ -280,7 +282,7 @@ export const OFFLINE_FARM: GameState = {
     "Fruit Patch": new Decimal(3),
     "Gold Rock": new Decimal(3),
     "Crop Plot": new Decimal(23),
-    "Basic Land": new Decimal(17),
+    "Basic Land": new Decimal(3),
     // ...getKeys(KNOWN_IDS).reduce(
     //   (acc, name) => ({
     //     ...acc,
@@ -300,6 +302,12 @@ export const OFFLINE_FARM: GameState = {
     readyAt: Date.now() + 5000,
   },
 
+  conversations: ["hank-intro"],
+  mailbox: {
+    read: [],
+    unread: [],
+  },
+
   buildings: {
     "Fire Pit": [
       {
@@ -316,7 +324,7 @@ export const OFFLINE_FARM: GameState = {
         createdAt: 0,
       },
     ],
-    "Hen House": [
+    Market: [
       {
         id: "123",
         readyAt: 0,

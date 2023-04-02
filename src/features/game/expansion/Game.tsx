@@ -41,6 +41,7 @@ import { PumpkinPlaza } from "features/pumpkinPlaza/PumpkinPlaza";
 import { BeachParty } from "features/pumpkinPlaza/BeachParty";
 import { HeadQuarters } from "features/pumpkinPlaza/HeadQuarters";
 import { StoneHaven } from "features/pumpkinPlaza/StoneHaven";
+import { Introduction } from "./components/Introduction";
 
 export const AUTO_SAVE_INTERVAL = 1000 * 30; // autosave every 30 seconds
 const SHOW_MODAL: Record<StateValues, boolean> = {
@@ -67,6 +68,7 @@ const SHOW_MODAL: Record<StateValues, boolean> = {
   revealed: false,
   buyingSFL: true,
   depositing: true,
+  introduction: false,
 };
 
 export const Game: React.FC = () => {
@@ -238,6 +240,8 @@ export const Game: React.FC = () => {
           {gameState.matches("depositing") && <Loading text="Depositing" />}
         </Panel>
       </Modal>
+
+      <Introduction />
 
       {GameContent()}
     </>

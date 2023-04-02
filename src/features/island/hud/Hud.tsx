@@ -114,6 +114,7 @@ export const Hud: React.FC<{ isFarming: boolean }> = ({ isFarming }) => {
           {landId && <LandId landId={landId} />}
           <Save />
           <BumpkinProfile />
+
           <Settings isFarming={isFarming} />
         </>
       )}

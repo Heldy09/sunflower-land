@@ -133,6 +133,7 @@ import {
   placeFruitPatch,
   PlaceFruitPatchAction,
 } from "./landExpansion/placeFruitPatch";
+import { ConversationEnded, endConversation } from "./landExpansion/converse";
 
 export type PlayingEvent =
   | TradeAction
@@ -174,7 +175,8 @@ export type PlayingEvent =
   | SellGarbageAction
   | StartChoreAction
   | CompleteChoreAction
-  | ExpandLandAction;
+  | ExpandLandAction
+  | ConversationEnded;
 
 export type PlacementEvent =
   | ConstructBuildingAction
@@ -191,6 +193,15 @@ export type PlacementEvent =
 
 export type GameEvent = PlayingEvent | PlacementEvent;
 export type GameEventName<T> = Extract<T, { type: string }>["type"];
+
+type EventNames = GameEventName<GameEvent>;
+
+export function isEventType<T extends PlayingEvent>(
+  action: PlayingEvent,
+  typeName: T["type"]
+): action is T {
+  return action.type === typeName;
+}
 
 /**
  * Type which enables us to map the event name to the payload containing that event name
@@ -243,6 +254,7 @@ export const PLAYING_EVENTS: Handlers<PlayingEvent> = {
   "chore.completed": completeChore,
   "chore.started": startChore,
   "land.expanded": expandLand,
+  "conversation.ended": endConversation,
 };
 
 export const PLACEMENT_EVENTS: Handlers<PlacementEvent> = {

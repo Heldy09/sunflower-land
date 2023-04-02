@@ -21,7 +21,6 @@ export interface Announcement {
   }[];
   link?: string;
   type?: "war" | "bumpkin";
-  autoOpen?: boolean;
 }
 
 /**
@@ -47,7 +46,6 @@ export const ANNOUNCEMENTS: Announcement[] = [
     ],
     image: resourceReboot,
     link: "https://docs.sunflower-land.com/player-guides/land-expansion-and-resources",
-    autoOpen: true,
   },
   {
     date: new Date("2023-03-30T00:00:00"),

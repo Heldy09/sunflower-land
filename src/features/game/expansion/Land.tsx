@@ -26,8 +26,8 @@ import { BUMPKIN_POSITION } from "features/island/bumpkin/types/character";
 import { Hud } from "features/island/hud/Hud";
 import { Resource } from "features/island/resources/Resource";
 import { IslandTravel } from "./components/travel/IslandTravel";
-import { BumpkinTutorial } from "./BumpkinTutorial";
 import { Placeable } from "./placeable/Placeable";
+import { HayseedHank } from "features/helios/components/hayseedHank/HayseedHank";
 
 const getIslandElements = ({
   buildings,
@@ -359,7 +359,7 @@ export const Land: React.FC = () => {
           y={boatCoordinates.y}
         />
 
-        <BumpkinTutorial bumpkinParts={bumpkin?.equipped} />
+        <HayseedHank x={boatCoordinates.x} y={boatCoordinates.y} />
 
         {gameState.matches("editing") && <Placeable />}
       </div>
