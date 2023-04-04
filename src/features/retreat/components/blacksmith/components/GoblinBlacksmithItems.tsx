@@ -47,7 +47,7 @@ export const GoblinBlacksmithItems: React.FC<Props> = ({ onClose }) => {
   useEffect(() => {
     const load = async () => {
       const supply = API_URL
-        ? await totalSupply(wallet.web3Provider, wallet.myAccount)
+        ? await totalSupply(wallet.web3Provider)
         : ({} as ItemSupply);
 
       console.log({ supply });

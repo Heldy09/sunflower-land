@@ -44,7 +44,7 @@ const TraderDeeplinkHandler: React.FC<{ farmId?: number }> = ({ farmId }) => {
 export const Navigation: React.FC = () => {
   const { authService } = useContext(AuthProvider.Context);
   const [authState, send] = useActor(authService);
-  const { provider } = authState.context;
+  const provider = authState.context.user.web3?.provider;
   const [showGame, setShowGame] = useState(false);
   useImagePreloader();
 
@@ -79,7 +79,6 @@ export const Navigation: React.FC = () => {
   useEffect(() => {
     const _showGame =
       authState.matches({ connected: "authorised" }) ||
-      authState.matches({ connected: "visitingContributor" }) ||
       authState.matches("visiting");
 
     // TODO: look into this further
@@ -113,7 +112,9 @@ export const Navigation: React.FC = () => {
               <Route
                 index
                 element={
-                  <TraderDeeplinkHandler farmId={authState.context.farmId} />
+                  <TraderDeeplinkHandler
+                    farmId={authState.context.user.farmId}
+                  />
                 }
               />
               <Route path=":id" element={<Retreat key="retreat" />} />

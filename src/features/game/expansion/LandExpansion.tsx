@@ -21,15 +21,6 @@ export const LandExpansion: React.FC = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // Our authMachine currently sits outside of our navigation. So if a the machine was in the visitingContributor
-    // state and the player loaded this route which can happen using the browser back button then fire
-    // the RETURN event to move the authMachine out of the invalid state.
-    if (authState.matches({ connected: "visitingContributor" })) {
-      send("RETURN");
-    }
-  }, []);
-
-  useEffect(() => {
     mapMovement.addListeners(container.current);
     return () => {
       mapMovement.removeListeners();

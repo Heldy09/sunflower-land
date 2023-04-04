@@ -12,9 +12,8 @@ import {
   NoFarm,
   CreatingFarm,
   Loading,
-  StartFarm,
-  VisitFarm,
   CreateFarm,
+  VisitFarm,
 } from "./components";
 
 import { Signing } from "./components/Signing";
@@ -43,7 +42,6 @@ export const Auth: React.FC = () => {
       centered
       show={
         !authState.matches({ connected: "authorised" }) &&
-        !authState.matches({ connected: "visitingContributor" }) &&
         !authState.matches("visiting")
       }
       backdrop={false}
@@ -72,7 +70,6 @@ export const Auth: React.FC = () => {
         {authState.matches({ connected: "donating" }) && <CreateFarm />}
         {authState.matches({ connected: "countdown" }) && <Countdown />}
         {authState.matches({ connected: "creatingFarm" }) && <CreatingFarm />}
-        {authState.matches({ connected: "readyToStart" }) && <StartFarm />}
         {(authState.matches({ connected: "blacklisted" }) ||
           authState.matches("blacklisted")) && (
           <Blacklisted
