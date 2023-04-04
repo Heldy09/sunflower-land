@@ -46,7 +46,7 @@ import { hasFeatureAccess } from "lib/flags";
 
 export const AUTO_SAVE_INTERVAL = 1000 * 30; // autosave every 30 seconds
 const SHOW_MODAL: Record<StateValues, boolean> = {
-  loading: true,
+  loading: false,
   playing: false,
   autosaving: false,
   syncing: true,
@@ -64,7 +64,8 @@ const SHOW_MODAL: Record<StateValues, boolean> = {
   visiting: false,
   loadLandToVisit: true,
   landToVisitNotFound: true,
-  checkIsVisiting: false,
+  loadingFullGame: true,
+  loadingGuestGame: true,
   revealing: false,
   revealed: false,
   buyingSFL: true,
@@ -111,8 +112,9 @@ export const Game: React.FC = () => {
   }, []);
 
   const loadingSession =
-    gameState.matches("loading") &&
-    gameState.context.sessionId === INITIAL_SESSION;
+    gameState.matches("loadingGuestGame") ||
+    (gameState.matches("loadingFullGame") &&
+      gameState.context.sessionId === INITIAL_SESSION);
 
   if (loadingSession || gameState.matches("loadLandToVisit")) {
     return (
