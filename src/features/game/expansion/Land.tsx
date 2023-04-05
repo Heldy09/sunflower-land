@@ -284,6 +284,9 @@ export const Land: React.FC = () => {
   const [gameState] = useActor(gameService);
   const { state } = gameState.context;
 
+  const autosaving =
+    gameState.matches("autosaving") || gameState.matches("guestAutosaving");
+
   const {
     expansionConstruction,
     buildings,
@@ -352,7 +355,7 @@ export const Land: React.FC = () => {
           bumpkin={bumpkin}
           isVisiting={gameState.matches("visiting")}
           inventory={gameState.context.state.inventory}
-          travelAllowed={!gameState.matches("autosaving")}
+          travelAllowed={!autosaving}
           onTravelDialogOpened={() => gameService.send("SAVE")}
           x={boatCoordinates.x}
           y={boatCoordinates.y}

@@ -43,6 +43,9 @@ export const Helios: React.FC = () => {
   const { bumpkin } = state;
   const [sealSpawn] = useState(getRandomSpawn());
 
+  const autosaving =
+    gameState.matches("autosaving") || gameState.matches("guestAutosaving");
+
   const [scrollIntoView] = useScrollIntoView();
 
   useLayoutEffect(() => {
@@ -84,7 +87,7 @@ export const Helios: React.FC = () => {
           x={3.5}
           y={-17}
           onTravelDialogOpened={() => gameService.send("SAVE")}
-          travelAllowed={!gameState.matches("autosaving")}
+          travelAllowed={!autosaving}
         />
       </div>
       <Hud isFarming={false} />

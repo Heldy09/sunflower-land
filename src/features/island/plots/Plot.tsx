@@ -63,7 +63,12 @@ export const Plot: React.FC<Props> = ({ id }) => {
     gameState: game.context.state,
   });
 
-  const playing = game.matches("playing") || game.matches("autosaving");
+  const playing =
+    game.matches("playing") ||
+    game.matches("playingGuestGame") ||
+    game.matches("playingFullGame") ||
+    game.matches("autosaving") ||
+    game.matches("guestAutosaving");
 
   // If selected item changes, then stop removing crops
   useEffect(() => setIsRemoving(false), [selectedItem]);

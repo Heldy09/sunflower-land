@@ -30,7 +30,12 @@ export const FruitPatch: React.FC<Props> = ({ id }) => {
 
   const fruit = patch && patch.fruit;
 
-  const playing = game.matches("playing") || game.matches("autosaving");
+  const playing =
+    game.matches("playing") ||
+    game.matches("playingGuestGame") ||
+    game.matches("playingFullGame") ||
+    game.matches("autosaving") ||
+    game.matches("guestAutosaving");
 
   const displayInformation = async () => {
     // First click show error

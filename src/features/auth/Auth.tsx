@@ -29,6 +29,13 @@ export const Auth: React.FC = () => {
   const { authService } = useContext(AuthProvider.Context);
   const [authState] = useActor(authService);
 
+  const loading =
+    authState.matches({ connected: "authorised" }) ||
+    authState.matches({ connected: "loadingFarm" }) ||
+    authState.matches("checkFarm") ||
+    authState.matches("initialising") ||
+    authState.matches("connectingAsGuest");
+
   const connecting =
     authState.matches("reconnecting") ||
     authState.matches("connectingToMetamask") ||
@@ -57,9 +64,7 @@ export const Auth: React.FC = () => {
         />
       </div>
       <Panel className="pb-1">
-        {(authState.matches({ connected: "loadingFarm" }) ||
-          authState.matches("checkFarm") ||
-          authState.matches("initialising")) && <Loading />}
+        {loading && <Loading />}
         {authState.matches("idle") && <Connect />}
         {connecting && <Loading text="Connecting" />}
         {authState.matches("connectedToWallet") && <ConnectedToWallet />}
