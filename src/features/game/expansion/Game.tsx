@@ -47,6 +47,9 @@ import { hasFeatureAccess } from "lib/flags";
 export const AUTO_SAVE_INTERVAL = 1000 * 30; // autosave every 30 seconds
 const SHOW_MODAL: Record<StateValues, boolean> = {
   loading: true,
+  playingFullGame: false,
+  playingGuestGame: false,
+  guestAutosaving: false,
   playing: false,
   autosaving: false,
   syncing: true,
@@ -186,7 +189,6 @@ export const Game: React.FC = () => {
           <Routes>
             <Route path="/" element={<Land />} />
             <Route path="/helios" element={<Helios key="helios" />} />
-
             <Route path="/plaza" element={<PumpkinPlaza key="plaza" />} />
             <Route path="/beach" element={<BeachParty key="beach-party" />} />
             <Route

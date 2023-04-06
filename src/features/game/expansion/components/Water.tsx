@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { GRID_WIDTH_PX, PIXEL_SCALE } from "features/game/lib/constants";
 
@@ -16,7 +16,6 @@ import { SharkBumpkin } from "./water/SharkBumpkin";
 import { Arcade } from "features/community/arcade/Arcade";
 import { FruitQuest } from "features/island/farmerQuest/FruitQuest";
 
-import { merchantAudio } from "lib/utils/sfx";
 import { ProjectDignityFrogs } from "features/community/components/ProjectDignityFrogs";
 import { ProjectDignitySeals } from "features/community/components/ProjectDignitySeals";
 import CommunityBoundary from "features/community/components/CommunityBoundary";
@@ -32,18 +31,8 @@ interface Props {
 }
 
 export const Water: React.FC<Props> = ({ level }) => {
-  const [showModal, setShowModal] = useState(false);
-
   // As the land gets bigger, push the water decorations out
   const offset = Math.ceil((Math.sqrt(level + 1) * LAND_WIDTH) / 2);
-
-  const openMerchant = () => {
-    setShowModal(true);
-    //Checks if merchantAudio is playing, if false, plays the sound
-    if (!merchantAudio.playing()) {
-      merchantAudio.play();
-    }
-  };
 
   const frogCoordinates = {
     x: level >= 7 ? -2 : 5,
@@ -144,7 +133,6 @@ export const Water: React.FC<Props> = ({ level }) => {
           <Pirate />
         </div>
       </MapPlacement>
-
       <MapPlacement x={16} y={-11} width={6}>
         <DailyReward />
         <img
@@ -154,16 +142,6 @@ export const Water: React.FC<Props> = ({ level }) => {
           }}
         />
       </MapPlacement>
-
-      {/* <MapPlacement x={-5} y={-16} width={6}>
-        <img
-          src={smallIsland}
-          style={{
-            width: `${PIXEL_SCALE * 82}px`,
-          }}
-        />
-      </MapPlacement> */}
-
       {/* Community Assets */}
       <CommunityBoundary>
         <MapPlacement x={frogCoordinates.x} y={frogCoordinates.y}>
